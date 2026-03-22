@@ -1,0 +1,48 @@
+<div class="center">
+    <section id="content">
+        <h1 class="subheader">Articulos encontrados</h1>
+
+        @for (!article || articles.length === 0){
+        <h1>No hay articulos con este patron de busqueda</h1>
+        }@else{
+        @for (article of articles; track article._id){
+        <div id="articles">
+            <article class="article-item" id="article-template">
+                <div class="image-wrap">
+                    <img src="{{ url + 'get-image/' + article.image }}" alt="{{ article.title}}" />
+                </div>
+
+                <h2>{{ article.title}}</h2>
+                <span class="date">
+                    {{article.date}}
+                </span>
+                <a href="{{'/blog/' + article._id}}">Leer más</a>
+                <div>
+                    <p>{{ article.content}}</p>
+                </div>
+                <div class="clearfix"></div>
+            </article>
+            <!--AÑADIR ARTICULOS VIA JS-->
+         </div>
+        }}
+
+    </section>
+
+    <aside id="sidebar">
+        <div id="nav-blog" class="sidebar-item">
+            <h3>Puedes hacer esto</h3>
+            <a href="/blog/crear" class="btn btn-success">Crear artículo</a>
+        </div>
+
+        <div id="search" class="sidebar-item">
+            <h3>Buscador</h3>
+            <p>Encuentra el artículo que buscas</p>
+            <form #searchForm="ngForm" (ngSubmit)="goSearch()">
+
+                <input type="text" name="search" [(ngModel)]="searchString" />
+                <input type="submit" name="submit" value="Buscar" class="btn" />
+            </form>
+        </div>
+    </aside>
+
+</div>
